@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   waterMeter: {
     backgroundColor: "#C2C2C2",
     borderColor: "#818181",
-    borderWidth: 3,
+    borderWidth: 2,
     borderRadius: 999,
     width: 155,
     overflow: "hidden",
