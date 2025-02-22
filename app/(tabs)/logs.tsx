@@ -6,42 +6,34 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { IconSymbol } from "@/components/ui/IconSymbol";
-
-const Divider: React.FC<React.PropsWithChildren> = ({ children }) => {
-  return (
-    <View
-      style={{
-        width: "100%",
-        flexDirection: "row",
-        alignItems: "center",
-        overflow: "hidden",
-        gap: 10,
-      }}>
-      <Text
-        style={{
-          color: "#666666",
-        }}>
-        {children}
-      </Text>
-      <View
-        style={{
-          borderBottomColor: "#666666",
-          borderBottomWidth: 1,
-          width: "100%",
-        }}
-      />
-    </View>
-  );
-};
+import Log, { LogType } from "@/components/logs/log";
+import { Divider } from "@/components/logs/divider";
 
 export default function TabTwoScreen() {
+  const TODAY_LOGS: LogType[] = [
+    { type: 2, message: "You finished your goal!", time: new Date() },
+  ];
+  const PREVIOUS_LOGS: LogType[] = [
+    {
+      type: 3,
+      message: "John congratulated you on finishing your goal!",
+      time: new Date(),
+    },
+    { type: 2, message: "You finished your goal!", time: new Date() },
+  ];
   return (
     <ThemedView style={styles.content}>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Logs</ThemedText>
       </ThemedView>
       <Divider>Today</Divider>
+      {TODAY_LOGS.map((log, i) => (
+        <Log {...log} key={i} />
+      ))}
       <Divider>Previous</Divider>
+      {PREVIOUS_LOGS.map((log, i) => (
+        <Log {...log} key={i} />
+      ))}
     </ThemedView>
   );
 }
