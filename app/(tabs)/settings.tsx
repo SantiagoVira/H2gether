@@ -1,4 +1,4 @@
-import { StyleSheet, Image, Platform, View } from "react-native";
+import { StyleSheet, Image, Platform, View, ScrollView } from "react-native";
 
 import { Collapsible } from "@/components/Collapsible";
 import { ExternalLink } from "@/components/ExternalLink";
@@ -8,10 +8,12 @@ import { ThemedView } from "@/components/ThemedView";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import { WaterMeter } from "@/components/settings/water-meter";
 import WaterGoal from "@/components/settings/water-goal";
+import { useState } from "react";
 
 export default function TabTwoScreen() {
+  const [waterGoal, setWaterGoal] = useState(2);
   return (
-    <ThemedView style={styles.content}>
+    <ScrollView style={styles.content}>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Settings</ThemedText>
       </ThemedView>
@@ -25,15 +27,39 @@ export default function TabTwoScreen() {
           How much water (measured in Liters) do you want to drink per day? (1L
           ≈ 4 cups){" "}
         </ThemedText>
-        <WaterGoal />
+        <WaterGoal waterGoal={waterGoal} setWaterGoal={setWaterGoal} />
+        <ThemedText>
+          Nice!{" "}
+          <ThemedText style={{ fontWeight: "bold" }}>
+            {waterGoal} liters
+          </ThemedText>{" "}
+          is a great goal!
+        </ThemedText>
       </View>
-    </ThemedView>
+      <View style={styles.section}>
+        <ThemedText type="subtitle">Notifications</ThemedText>
+        <ThemedText>
+          How much water (measured in Liters) do you want to drink per day? (1L
+          ≈ 4 cups){" "}
+        </ThemedText>
+        <WaterGoal waterGoal={waterGoal} setWaterGoal={setWaterGoal} />
+        <ThemedText>
+          Nice!{" "}
+          <ThemedText style={{ fontWeight: "bold" }}>
+            {waterGoal} liters
+          </ThemedText>{" "}
+          is a great goal!
+        </ThemedText>
+      </View>
+      <View style={{ height: 150, width: "100%" }} />
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   section: {
     gap: 8,
+    marginTop: 24,
   },
   waterMeter: {
     backgroundColor: "#C2C2C2",
@@ -55,8 +81,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 32,
     gap: 16,
-    overflow: "hidden",
-    paddingTop: 86,
+    paddingVertical: 86,
+    paddingBottom: "100%",
+    backgroundColor: "#F3F7FF",
   },
   titleContainer: {
     flexDirection: "row",

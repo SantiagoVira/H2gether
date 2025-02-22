@@ -1,23 +1,20 @@
-import { StyleSheet, Image, Platform, Pressable } from "react-native";
-
-import { Collapsible } from "@/components/Collapsible";
-import { ExternalLink } from "@/components/ExternalLink";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
+import { StyleSheet, Pressable } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import LeaderboardRow from "@/components/friends/leaderboard-row";
+import { FriendRequestType, FriendType } from "@/types";
 
 export default function TabTwoScreen() {
-  const FRIENDS: { name: string; drank: number }[] = [
+  const FRIENDS: FriendType[] = [
     { name: "John E.", drank: 2 },
     { name: "Aramie E.", drank: 80 },
     { name: "Nirjhor N.", drank: 10 },
     { name: "Santiago V.", drank: 30 },
   ];
-  const YOU = { name: "You", drank: 90 };
+  const YOU: FriendType = { name: "You", drank: 90 };
 
-  const REQUESTS: { name: string; incoming: boolean }[] = [];
+  const REQUESTS: FriendRequestType[] = [];
   return (
     <ThemedView style={styles.content}>
       <ThemedView style={styles.titleContainer}>

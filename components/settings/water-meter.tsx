@@ -5,11 +5,19 @@ import {
   PanGestureHandler,
 } from "react-native-gesture-handler";
 import { IconSymbol } from "../ui/IconSymbol";
+import { RDSSA } from "@/types";
 
-export const WaterMeter = () => {
+export const WaterMeter: React.FC<{
+  waterGoal: number;
+  setWaterGoal: RDSSA<number>;
+}> = ({ waterGoal, setWaterGoal }) => {
   const water_min = 60;
   const water_max = 275;
-  const [drawerHeight, setDrawerHeight] = useState(water_min);
+  const literHeight = (water_max - water_min) / 6;
+
+  const [drawerHeight, setDrawerHeight] = useState(
+    (waterGoal - 2) * literHeight + water_min
+  );
 
   const panResponder = PanResponder.create({
     onMoveShouldSetPanResponder: () => true,
@@ -24,9 +32,10 @@ export const WaterMeter = () => {
       }
 
       newDrawerHeight -= water_min;
-      const literHeight = (water_max - water_min) / 6;
-      newDrawerHeight =
-        water_min + literHeight * Math.round(newDrawerHeight / literHeight);
+      const newLiters = Math.round(newDrawerHeight / literHeight);
+      setWaterGoal(newLiters + 2);
+
+      newDrawerHeight = water_min + literHeight * newLiters;
 
       setDrawerHeight(newDrawerHeight);
     },

@@ -1,13 +1,9 @@
-import { StyleSheet, Image, Platform, Text, View } from "react-native";
-
-import { Collapsible } from "@/components/Collapsible";
-import { ExternalLink } from "@/components/ExternalLink";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
+import { StyleSheet } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { IconSymbol } from "@/components/ui/IconSymbol";
-import Log, { LogType } from "@/components/logs/log";
+import Log from "@/components/logs/log";
 import { Divider } from "@/components/logs/divider";
+import { LogType } from "@/types";
 
 export default function TabTwoScreen() {
   const TODAY_LOGS: LogType[] = [

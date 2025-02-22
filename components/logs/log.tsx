@@ -12,8 +12,8 @@ ICON MESSAGE TIME
 import { StyleSheet, View } from "react-native";
 import { IconSymbol } from "../ui/IconSymbol";
 import { ThemedText } from "../ThemedText";
+import { LogType } from "@/types";
 
-export type LogType = { type: number; message: string; time: Date };
 const icons = [
   {
     color: "#6F93F5",

@@ -1,32 +1,16 @@
 import { View } from "react-native";
 import { WaterMeter } from "./water-meter";
 import { ThemedText } from "../ThemedText";
+import { WaterMeterMark } from "./water-meter-mark";
+import { RDSSA } from "@/types";
 
-const Tab: React.FC<{ liters: number }> = ({ liters }) => {
-  return (
-    <View
-      style={{
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        gap: 4,
-      }}>
-      <View
-        style={{
-          height: 4,
-          backgroundColor: "#818181",
-          width: liters % 2 == 0 ? 10 : 5,
-        }}
-      />
-      {liters % 2 == 0 && <ThemedText>{liters}L</ThemedText>}
-    </View>
-  );
-};
-
-const WaterGoal: React.FC = () => {
+const WaterGoal: React.FC<{
+  waterGoal: number;
+  setWaterGoal: RDSSA<number>;
+}> = ({ waterGoal, setWaterGoal }) => {
   return (
     <View style={{ flexDirection: "row", alignItems: "center" }}>
-      <WaterMeter />
+      <WaterMeter waterGoal={waterGoal} setWaterGoal={setWaterGoal} />
       <View
         style={{
           height: 275,
@@ -35,13 +19,9 @@ const WaterGoal: React.FC = () => {
           alignItems: "flex-start",
           justifyContent: "space-between",
         }}>
-        <Tab liters={8} />
-        <Tab liters={7} />
-        <Tab liters={6} />
-        <Tab liters={5} />
-        <Tab liters={4} />
-        <Tab liters={3} />
-        <Tab liters={2} />
+        {Array.from({ length: 7 }, (v, k) => 8 - k).map((i) => (
+          <WaterMeterMark liters={i} key={i} />
+        ))}
       </View>
     </View>
   );
