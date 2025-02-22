@@ -13,7 +13,13 @@ import { useState } from "react";
 export default function TabTwoScreen() {
   const [waterGoal, setWaterGoal] = useState(2);
   return (
-    <ScrollView style={styles.content}>
+    <ScrollView
+      style={styles.content}
+      contentContainerStyle={{
+        paddingBottom: 60,
+        gap: 16,
+      }}
+      showsVerticalScrollIndicator={false}>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Settings</ThemedText>
       </ThemedView>
@@ -39,19 +45,10 @@ export default function TabTwoScreen() {
       <View style={styles.section}>
         <ThemedText type="subtitle">Notifications</ThemedText>
         <ThemedText>
-          How much water (measured in Liters) do you want to drink per day? (1L
-          ≈ 4 cups){" "}
-        </ThemedText>
-        <WaterGoal waterGoal={waterGoal} setWaterGoal={setWaterGoal} />
-        <ThemedText>
-          Nice!{" "}
-          <ThemedText style={{ fontWeight: "bold" }}>
-            {waterGoal} liters
-          </ThemedText>{" "}
-          is a great goal!
+          We use notifications to keep you on track and motivated for your
+          goals!
         </ThemedText>
       </View>
-      <View style={{ height: 150, width: "100%" }} />
     </ScrollView>
   );
 }
@@ -80,9 +77,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     padding: 32,
-    gap: 16,
-    paddingVertical: 86,
-    paddingBottom: "100%",
+    paddingTop: 86,
     backgroundColor: "#F3F7FF",
   },
   titleContainer: {
