@@ -4,10 +4,18 @@ import { ThemedView } from "@/components/ThemedView";
 import WaterGoal from "@/components/settings/water-goal";
 import { useState } from "react";
 import NotificationFrequency from "@/components/settings/notification-frequency";
+import NotificationTimeRange from "@/components/settings/notification-time-range";
 
 export default function TabTwoScreen() {
+  const EIGHT_AM = new Date();
+  const EIGHT_PM = new Date();
+  EIGHT_AM.setHours(8, 0, 0, 0);
+  EIGHT_PM.setHours(20, 0, 0, 0);
+
   const [waterGoal, setWaterGoal] = useState(2);
   const [notifFreq, setNotifFreq] = useState(3);
+  const [notifStart, setNotifStart] = useState(EIGHT_AM);
+  const [notifEnd, setNotifEnd] = useState(EIGHT_PM);
   return (
     <ScrollView
       style={styles.content}
@@ -25,6 +33,15 @@ export default function TabTwoScreen() {
       </ThemedText>
       <View style={styles.section}>
         <ThemedText type="subtitle">Water Goal</ThemedText>
+        <ThemedText>
+          It's good to have a consistent goal for daily water intake!
+        </ThemedText>
+        <View
+          style={{
+            borderColor: "gray",
+            borderWidth: StyleSheet.hairlineWidth,
+          }}
+        />
         <ThemedText>
           How much water (measured in Liters) do you want to drink per day? (1L
           ≈ 4 cups){" "}
@@ -44,10 +61,20 @@ export default function TabTwoScreen() {
           We use notifications to keep you on track and motivated for your
           goals!
         </ThemedText>
+        <View
+          style={{
+            borderColor: "gray",
+            borderWidth: StyleSheet.hairlineWidth,
+          }}
+        />
         <ThemedText>
           How often would you like to be notified to stay on track?
         </ThemedText>
         <NotificationFrequency freq={notifFreq} setFreq={setNotifFreq} />
+        <ThemedText>When should we notify you? </ThemedText>
+        <NotificationTimeRange
+          {...{ notifStart, notifEnd, setNotifStart, setNotifEnd }}
+        />
       </View>
     </ScrollView>
   );
