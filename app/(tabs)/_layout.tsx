@@ -1,6 +1,6 @@
-import { Tabs } from "expo-router";
+import { router, Tabs } from "expo-router";
 import React from "react";
-import { Platform } from "react-native";
+import { Platform, Text, View } from "react-native";
 
 import { HapticTab } from "@/components/HapticTab";
 import { IconSymbol } from "@/components/ui/IconSymbol";
@@ -43,6 +43,21 @@ export default function TabLayout() {
             <IconSymbol size={28} name="person.3.fill" color={color} />
           ),
         }}
+      />
+      <Tabs.Screen
+        name="modal"
+        options={{
+          tabBarIcon: ({ color }) => (
+            <IconSymbol size={28} name="person.3.fill" color={color} />
+          ),
+        }}
+        listeners={() => ({
+          tabPress: (e) => {
+            console.log("Clicked");
+            e.preventDefault();
+            router.push("/add");
+          },
+        })}
       />
       <Tabs.Screen
         name="logs"
