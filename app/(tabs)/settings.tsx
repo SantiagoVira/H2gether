@@ -1,17 +1,13 @@
-import { StyleSheet, Image, Platform, View, ScrollView } from "react-native";
-
-import { Collapsible } from "@/components/Collapsible";
-import { ExternalLink } from "@/components/ExternalLink";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
+import { StyleSheet, View, ScrollView } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { IconSymbol } from "@/components/ui/IconSymbol";
-import { WaterMeter } from "@/components/settings/water-meter";
 import WaterGoal from "@/components/settings/water-goal";
 import { useState } from "react";
+import NotificationFrequency from "@/components/settings/notification-frequency";
 
 export default function TabTwoScreen() {
   const [waterGoal, setWaterGoal] = useState(2);
+  const [notifFreq, setNotifFreq] = useState(3);
   return (
     <ScrollView
       style={styles.content}
@@ -48,6 +44,10 @@ export default function TabTwoScreen() {
           We use notifications to keep you on track and motivated for your
           goals!
         </ThemedText>
+        <ThemedText>
+          How often would you like to be notified to stay on track?
+        </ThemedText>
+        <NotificationFrequency freq={notifFreq} setFreq={setNotifFreq} />
       </View>
     </ScrollView>
   );
