@@ -66,7 +66,7 @@ export default function TabLayout() {
         options={{
           title: "Logs",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="doc.text" color={color} />
+            <IconSymbol size={28} name="doc.text.fill" color={color} />
           ),
         }}
       />
@@ -75,7 +75,7 @@ export default function TabLayout() {
         options={{
           title: "Settings",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="gear" color={color} />
+            <IconSymbol size={28} name="gearshape.2.fill" color={color} />
           ),
         }}
       />
