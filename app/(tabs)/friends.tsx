@@ -6,14 +6,17 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { IconSymbol } from "@/components/ui/IconSymbol";
+import LeaderboardRow from "@/components/friends/leaderboard-row";
 
 export default function TabTwoScreen() {
   const FRIENDS: { name: string; drank: number }[] = [
-    { name: "John B.", drank: 80 },
-    { name: "John C.", drank: 30 },
-    { name: "John D.", drank: 10 },
     { name: "John E.", drank: 2 },
+    { name: "Aramie E.", drank: 80 },
+    { name: "Nirjhor N.", drank: 10 },
+    { name: "Santiago V.", drank: 30 },
   ];
+  const YOU = { name: "You", drank: 90 };
+
   const REQUESTS: { name: string; incoming: boolean }[] = [];
   return (
     <ThemedView style={styles.content}>
@@ -46,6 +49,11 @@ export default function TabTwoScreen() {
       <ThemedText type="title" style={{ marginTop: 36 }}>
         Leaderboard
       </ThemedText>
+      {[...FRIENDS, YOU]
+        .sort((a, b) => b.drank - a.drank)
+        .map((friend, r) => (
+          <LeaderboardRow rank={r + 1} {...friend} isSelf key={r} />
+        ))}
     </ThemedView>
   );
 }
