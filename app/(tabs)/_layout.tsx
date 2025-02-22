@@ -1,6 +1,6 @@
 import { router, Tabs } from "expo-router";
 import React from "react";
-import { Platform, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 
 import { HapticTab } from "@/components/HapticTab";
 import { IconSymbol } from "@/components/ui/IconSymbol";
@@ -14,7 +14,7 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: "black", //Colors[colorScheme ?? "light"].tint,
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
@@ -47,13 +47,15 @@ export default function TabLayout() {
       <Tabs.Screen
         name="modal"
         options={{
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="person.3.fill" color={color} />
+          tabBarIcon: () => (
+            <View style={styles.addButtonBackground}>
+              <IconSymbol size={75} name="plus.circle.fill" color="#547BE5" />
+            </View>
           ),
+          tabBarLabel: "",
         }}
         listeners={() => ({
           tabPress: (e) => {
-            console.log("Clicked");
             e.preventDefault();
             router.push("/add");
           },
@@ -80,3 +82,18 @@ export default function TabLayout() {
     </Tabs>
   );
 }
+
+const styles = StyleSheet.create({
+  addButtonBackground: {
+    backgroundColor: "white",
+    borderRadius: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: 60,
+    height: 60,
+    marginBottom: 40,
+    borderColor: "#F3F7FF",
+    borderWidth: 38,
+  },
+});
