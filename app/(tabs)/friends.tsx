@@ -10,9 +10,9 @@ import { router } from "expo-router";
 export default function TabTwoScreen() {
   const FRIENDS: FriendType[] = [
     { name: "John E.", drank: 2 },
-    { name: "Aramie E.", drank: 80 },
-    { name: "Nirjhor N.", drank: 10 },
-    { name: "Santiago V.", drank: 30 },
+    { name: "Jim V.", drank: 80 },
+    { name: "Jack R.", drank: 10 },
+    { name: "James F.", drank: 30 },
   ];
   const YOU: FriendType = { name: "You", drank: 90 };
 
@@ -64,7 +64,12 @@ export default function TabTwoScreen() {
       {[...FRIENDS, YOU]
         .sort((a, b) => b.drank - a.drank)
         .map((friend, r) => (
-          <LeaderboardRow rank={r + 1} {...friend} isSelf key={r} />
+          <LeaderboardRow
+            rank={r + 1}
+            {...friend}
+            isSelf={friend.name === "You"}
+            key={r}
+          />
         ))}
     </ThemedView>
   );

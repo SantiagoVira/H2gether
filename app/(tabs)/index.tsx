@@ -8,19 +8,20 @@ import WaterTracker from "@/components/home/water-tracker";
 export default function HomeScreen() {
   const NAME = "Santiago";
   const DRANK = 0.5;
-  const GOAL = 0.3;
+  const GOAL = 0.7;
   const MESSAGES = [
     "You've fallen behind schedule. Let's pick up the pace!",
     "You're staying on track! Great work, keep it up!",
     "You're way ahead of schedule! Fantastic job!!",
   ];
+  const messageIdx = Math.abs(GOAL - DRANK) < 0.05 ? 1 : DRANK > GOAL ? 2 : 0;
   return (
     <ThemedView style={styles.content}>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Hey {NAME}!</ThemedText>
         <HelloWave />
       </ThemedView>
-      <ThemedText>{MESSAGES[2]}</ThemedText>
+      <ThemedText>{MESSAGES[messageIdx]}</ThemedText>
       <WaterTracker drank={DRANK} goal={GOAL} />
       <Text
         style={{

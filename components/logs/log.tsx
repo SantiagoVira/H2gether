@@ -9,10 +9,11 @@ ICON MESSAGE TIME
 
 */
 
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import { IconSymbol } from "../ui/IconSymbol";
 import { ThemedText } from "../ThemedText";
 import { LogType } from "@/types";
+import { useState } from "react";
 
 const icons = [
   {
@@ -37,13 +38,28 @@ const icons = [
 
 const Log: React.FC<LogType> = ({ type, message, time }) => {
   const { color, Icon } = icons[type];
+  const [congratsSent, setCongratsSent] = useState(false);
   return (
     <View style={styles.container}>
       <View style={{ ...styles.iconWrapper, backgroundColor: color }}>
         <Icon />
       </View>
       <ThemedText style={styles.message} numberOfLines={2}>
-        {message}
+        {message}{" "}
+        {type === 1 &&
+          (congratsSent ? (
+            <ThemedText>Congratulations sent!</ThemedText>
+          ) : (
+            <Pressable
+              onPress={() => {
+                console.log("Congrats yo");
+                setCongratsSent(true);
+              }}>
+              <ThemedText style={{ textDecorationLine: "underline" }}>
+                Congratulate them?
+              </ThemedText>
+            </Pressable>
+          ))}
       </ThemedText>
       <ThemedText style={styles.time}>
         {time.toLocaleTimeString(navigator.language, {
