@@ -4,6 +4,7 @@ import { ThemedView } from "@/components/ThemedView";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import LeaderboardRow from "@/components/friends/leaderboard-row";
 import { FriendRequestType, FriendType } from "@/types";
+import { trpc } from "../../lib/trpc";
 
 export default function TabTwoScreen() {
   const FRIENDS: FriendType[] = [
@@ -15,6 +16,9 @@ export default function TabTwoScreen() {
   const YOU: FriendType = { name: "You", drank: 90 };
 
   const REQUESTS: FriendRequestType[] = [];
+  const data = trpc.user.getFriends.useQuery({ userId: "" });
+  console.log(data);
+
   return (
     <ThemedView style={styles.content}>
       <ThemedView style={styles.titleContainer}>

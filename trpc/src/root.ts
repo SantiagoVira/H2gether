@@ -1,14 +1,29 @@
-import { router } from "./trpc";
-import { authRouter } from "./routers/authRouter";
-import { samplesRouter } from "./routers/samplesRouter";
-import { queryRouter } from "./routers/queryRouter";
-import { indexRouter } from "./routers/indexRouter";
+import { publicProcedure, router } from "./trpc";
+import { z } from "zod";
+import { eq, or } from "drizzle-orm";
+import { friendships } from "../../db/schema";
 
-export const appRouter = router({
-  auth: authRouter,
-  samples: samplesRouter,
-  queries: queryRouter,
-  index: indexRouter,
+const userRouter = router({
+  getFriends: publicProcedure
+    .input(
+      z.object({
+        userId: z.string(),
+      })
+    )
+    .query(async ({ input, ctx }) => {
+      return await ctx.db.query.users.findMany({
+        with: {
+          friendships: {
+            where: or(
+              eq(friendships.user1Id, input.userId),
+              eq(friendships.user2Id, input.userId)
+            ),
+          },
+        },
+      });
+    }),
 });
 
-export type AppRouter = typeof appRouter;
+export const appRouter = router({
+  user: userRouter,
+});

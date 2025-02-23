@@ -17,9 +17,12 @@ export const createTRPCContext = (ctx: HonoContext) => {
   };
 };
 
-const t = initTRPC
-  .context<ReturnType<typeof createTRPCContext>>()
-  .create({ transformer: SuperJSON });
+const t = initTRPC.context<ReturnType<typeof createTRPCContext>>().create({
+  transformer: SuperJSON,
+  errorFormatter({ shape }) {
+    return shape;
+  },
+});
 
 export const publicProcedure = t.procedure;
 

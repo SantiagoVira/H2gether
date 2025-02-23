@@ -1,9 +1,10 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "NodeNext",
+    "module": "Preserve",
     "strict": true,
     "verbatimModuleSyntax": true,
+    "moduleResolution": "Bundler",
     "skipLibCheck": true,
     "types": ["node"],
     "jsx": "react-jsx",

@@ -6,13 +6,14 @@
     ".": "./index.ts",
     "./types": "./types.ts"
   },
+  "type": "module",
   "author": "",
   "license": "MIT",
   "description": "",
   "dependencies": {
     "@clerk/backend": "^1.24.2",
-    "@trpc/client": "^11.0.0-rc.802",
-    "@trpc/server": "^11.0.0-rc.802",
+    "@trpc/client": "^10.45.2",
+    "@trpc/server": "^10.45.2",
     "hono": "^4.7.2",
     "superjson": "^2.2.2"
   }
