@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { ThemedText } from "../ThemedText";
 
-export const WaterMeterMark: React.FC<{ liters: number }> = ({ liters }) => {
+export const WaterMeterMark: React.FC<{ percent: number }> = ({ percent }) => {
   return (
     <View
       style={{
@@ -14,10 +14,10 @@ export const WaterMeterMark: React.FC<{ liters: number }> = ({ liters }) => {
         style={{
           height: 4,
           backgroundColor: "#818181",
-          width: liters % 1 == 0 ? 10 : 5,
+          width: percent % 2 == 0 ? 10 : 5,
         }}
       />
-      {liters % 1 == 0 && <ThemedText>{liters}L</ThemedText>}
+      {percent % 20 == 0 && <ThemedText>{percent}%</ThemedText>}
     </View>
   );
 };

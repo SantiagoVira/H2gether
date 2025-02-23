@@ -32,7 +32,11 @@ export default function AddScreen() {
         Quick Add ⚡️
       </ThemedText>
       <View>
-        <Row data={["Item", "fl oz", "Liters"]} flexArr={[5, 2, 2]} />
+        <Row
+          data={["Item", "fl oz", "Liters"]}
+          flexArr={[5, 2, 2]}
+          style={{ borderBottomWidth: 1 }}
+        />
         <QuickAddRow
           name="Average Water Bottle"
           oz={16.9}

@@ -13,10 +13,10 @@ export const WaterMeter: React.FC<{
 }> = ({ waterGoal, setWaterGoal }) => {
   const water_min = 60;
   const water_max = 275;
-  const literHeight = (water_max - water_min) / 6;
+  const halfLiterHeight = (water_max - water_min) / 4;
 
   const [drawerHeight, setDrawerHeight] = useState(
-    (waterGoal - 2) * literHeight + water_min
+    ((waterGoal - 2) / 2) * halfLiterHeight + water_min
   );
 
   const panResponder = PanResponder.create({
@@ -32,10 +32,10 @@ export const WaterMeter: React.FC<{
       }
 
       newDrawerHeight -= water_min;
-      const newLiters = Math.round(newDrawerHeight / literHeight);
+      const newLiters = Math.round(newDrawerHeight / halfLiterHeight) / 2;
       setWaterGoal(newLiters + 2);
 
-      newDrawerHeight = water_min + literHeight * newLiters;
+      newDrawerHeight = water_min + halfLiterHeight * newLiters * 2;
 
       setDrawerHeight(newDrawerHeight);
     },

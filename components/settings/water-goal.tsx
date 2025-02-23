@@ -19,7 +19,7 @@ const WaterGoal: React.FC<{
           alignItems: "flex-start",
           justifyContent: "space-between",
         }}>
-        {Array.from({ length: 7 }, (v, k) => 8 - k).map((i) => (
+        {Array.from({ length: 5 }, (v, k) => (4 - k) / 2 + 2).map((i) => (
           <WaterMeterMark liters={i} key={i} />
         ))}
       </View>
