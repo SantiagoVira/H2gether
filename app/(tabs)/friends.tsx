@@ -48,7 +48,7 @@ export default function TabTwoScreen() {
         </ThemedView>
         <Pressable
           onPress={() => {
-            console.log("NEW FRIEND");
+            router.push("/new-friend");
           }}>
           <IconSymbol
             size={45}

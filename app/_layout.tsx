@@ -88,6 +88,10 @@ export default function RootLayout() {
                 name="add"
               />
               <Stack.Screen
+                options={{ presentation: "modal", headerShown: false }}
+                name="new-friend"
+              />
+              <Stack.Screen
                 name="all-friends"
                 options={{ headerShown: false }}
               />
