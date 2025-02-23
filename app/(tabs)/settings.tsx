@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import NotificationFrequency from "@/components/settings/notification-frequency";
 import NotificationTimeRange from "@/components/settings/notification-time-range";
 import * as Haptics from "expo-haptics";
+import { Pressable } from "react-native-gesture-handler";
+import { useAuth, useUser } from "@clerk/clerk-expo";
 
 export default function TabTwoScreen() {
   const EIGHT_AM = new Date();
@@ -17,6 +19,9 @@ export default function TabTwoScreen() {
   const [notifFreq, setNotifFreq] = useState(3);
   const [notifStart, setNotifStart] = useState(EIGHT_AM);
   const [notifEnd, setNotifEnd] = useState(EIGHT_PM);
+
+  const { user } = useUser();
+  const { signOut } = useAuth();
 
   useEffect(() => {
     if (process.env.EXPO_OS === "ios") {
@@ -84,6 +89,30 @@ export default function TabTwoScreen() {
         <NotificationTimeRange
           {...{ notifStart, notifEnd, setNotifStart, setNotifEnd }}
         />
+      </View>
+
+      <View style={styles.section}>
+        <ThemedText type="subtitle">Account</ThemedText>
+        <View
+          style={{
+            borderColor: "gray",
+            borderWidth: StyleSheet.hairlineWidth,
+          }}
+        />
+        <ThemedText>Currently signed in as {user?.fullName}</ThemedText>
+        <Pressable
+          style={{
+            width: "100%",
+            backgroundColor: "#E24545",
+            borderRadius: 8,
+            padding: 8,
+          }}
+          onPress={() => signOut()}>
+          <ThemedText
+            style={{ fontWeight: "bold", color: "white", textAlign: "center" }}>
+            Log Out
+          </ThemedText>
+        </Pressable>
       </View>
     </ScrollView>
   );
