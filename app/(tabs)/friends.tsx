@@ -6,6 +6,7 @@ import LeaderboardRow from "@/components/friends/leaderboard-row";
 import { FriendRequestType, FriendType } from "@/types";
 import { trpc } from "../../lib/trpc";
 import { router } from "expo-router";
+import { useUser } from "@clerk/clerk-expo";
 
 export default function TabTwoScreen() {
   const FRIENDS: FriendType[] = [
@@ -21,7 +22,12 @@ export default function TabTwoScreen() {
     { name: "Thea G.", drank: 18 },
     { name: "Coco V.", drank: 48 },
   ];
-  const YOU: FriendType = { name: "You", drank: 52 };
+  const { user } = useUser();
+  const YOU: FriendType = {
+    name: "You",
+    drank:
+      100 * trpc.user.getPercentDrank.useSuspenseQuery({ userId: user!.id })[0],
+  };
 
   const REQUESTS: FriendRequestType[] = [
     { name: "Todd Beasly", incoming: true },
