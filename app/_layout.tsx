@@ -87,6 +87,14 @@ export default function RootLayout() {
                 options={{ presentation: "modal", headerShown: false }}
                 name="add"
               />
+              <Stack.Screen
+                name="all-friends"
+                options={{ headerShown: false }}
+              />
+              <Stack.Screen
+                name="friend-requests"
+                options={{ headerShown: false }}
+              />
             </Stack>
             <StatusBar style="auto" />
           </ThemeProvider>

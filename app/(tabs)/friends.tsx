@@ -1,10 +1,11 @@
-import { StyleSheet, Pressable } from "react-native";
+import { StyleSheet, Pressable, View } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { IconSymbol } from "@/components/ui/IconSymbol";
 import LeaderboardRow from "@/components/friends/leaderboard-row";
 import { FriendRequestType, FriendType } from "@/types";
 import { trpc } from "../../lib/trpc";
+import { router } from "expo-router";
 
 export default function TabTwoScreen() {
   const FRIENDS: FriendType[] = [
@@ -16,24 +17,34 @@ export default function TabTwoScreen() {
   const YOU: FriendType = { name: "You", drank: 90 };
 
   const REQUESTS: FriendRequestType[] = [];
-  const data = trpc.user.getFriends.useQuery({ userId: "" });
-  console.log(data);
+  // const data = trpc.user.getFriends.useQuery({ userId: "" });
 
   return (
     <ThemedView style={styles.content}>
       <ThemedView style={styles.titleContainer}>
         <ThemedView style={styles.titleTextContainer}>
-          <ThemedText type="title">Your Friends</ThemedText>
-          <ThemedText>
-            <ThemedText style={{ fontWeight: "bold" }}>
-              {FRIENDS.length}
-            </ThemedText>{" "}
-            friends •{" "}
-            <ThemedText style={{ fontWeight: "bold" }}>
-              {REQUESTS.length}
-            </ThemedText>{" "}
-            requests
-          </ThemedText>
+          <ThemedText type="title">Friends</ThemedText>
+          <View style={{ alignItems: "center", gap: 3, flexDirection: "row" }}>
+            <Pressable
+              style={{ gap: 4, alignItems: "center", flexDirection: "row" }}
+              onPress={() => router.push("/all-friends")}>
+              <ThemedText style={{ fontWeight: "bold" }}>
+                {FRIENDS.length}
+              </ThemedText>
+              <ThemedText>friends</ThemedText>
+            </Pressable>
+
+            <ThemedText>{" • "}</ThemedText>
+
+            <Pressable
+              style={{ gap: 4, alignItems: "center", flexDirection: "row" }}
+              onPress={() => router.push("/friend-requests")}>
+              <ThemedText style={{ fontWeight: "bold" }}>
+                {REQUESTS.length}
+              </ThemedText>
+              <ThemedText>requests</ThemedText>
+            </Pressable>
+          </View>
         </ThemedView>
         <Pressable
           onPress={() => {
