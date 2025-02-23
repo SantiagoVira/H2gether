@@ -14,8 +14,6 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 
 import { tokenCache } from "@/cache";
 import { ClerkProvider, ClerkLoaded, useAuth } from "@clerk/clerk-expo";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -47,18 +45,16 @@ export default function RootLayout() {
       <ClerkLoaded>
         <ThemeProvider
           value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-          <GestureHandlerRootView>
-            <Stack>
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-              <Stack.Screen name="+not-found" />
-              <Stack.Screen
-                options={{ presentation: "modal", headerShown: false }}
-                name="add"
-              />
-            </Stack>
-            <StatusBar style="auto" />
-          </GestureHandlerRootView>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+            <Stack.Screen name="+not-found" />
+            <Stack.Screen
+              options={{ presentation: "modal", headerShown: false }}
+              name="add"
+            />
+          </Stack>
+          <StatusBar style="auto" />
         </ThemeProvider>
       </ClerkLoaded>
     </ClerkProvider>

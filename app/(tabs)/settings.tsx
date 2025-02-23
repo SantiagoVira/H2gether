@@ -6,8 +6,12 @@ import { useEffect, useState } from "react";
 import NotificationFrequency from "@/components/settings/notification-frequency";
 import NotificationTimeRange from "@/components/settings/notification-time-range";
 import * as Haptics from "expo-haptics";
-import { Pressable } from "react-native-gesture-handler";
+import {
+  GestureHandlerRootView,
+  Pressable,
+} from "react-native-gesture-handler";
 import { useAuth, useUser } from "@clerk/clerk-expo";
+import LogOut from "@/components/settings/log-out";
 
 export default function TabTwoScreen() {
   const EIGHT_AM = new Date();
@@ -21,7 +25,6 @@ export default function TabTwoScreen() {
   const [notifEnd, setNotifEnd] = useState(EIGHT_PM);
 
   const { user } = useUser();
-  const { signOut } = useAuth();
 
   useEffect(() => {
     if (process.env.EXPO_OS === "ios") {
@@ -31,90 +34,80 @@ export default function TabTwoScreen() {
   }, [waterGoal]);
 
   return (
-    <ScrollView
-      style={styles.content}
-      contentContainerStyle={{
-        paddingBottom: 60,
-        gap: 16,
-      }}
-      showsVerticalScrollIndicator={false}>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Settings</ThemedText>
-      </ThemedView>
-      <ThemedText>
-        Here you can update all of your preferences. Changes are automatically
-        saved!
-      </ThemedText>
-      <View style={styles.section}>
-        <ThemedText type="subtitle">Water Goal</ThemedText>
+    <GestureHandlerRootView>
+      <ScrollView
+        style={styles.content}
+        contentContainerStyle={{
+          paddingBottom: 60,
+          gap: 16,
+        }}
+        showsVerticalScrollIndicator={false}>
+        <ThemedView style={styles.titleContainer}>
+          <ThemedText type="title">Settings</ThemedText>
+        </ThemedView>
         <ThemedText>
-          It's good to have a consistent goal for daily water intake!
+          Here you can update all of your preferences. Changes are automatically
+          saved!
         </ThemedText>
-        <View
-          style={{
-            borderColor: "gray",
-            borderWidth: StyleSheet.hairlineWidth,
-          }}
-        />
-        <ThemedText>
-          How much water (measured in Liters) do you want to drink per day? (1L
-          ≈ 4 cups){" "}
-        </ThemedText>
-        <WaterGoal waterGoal={waterGoal} setWaterGoal={setWaterGoal} />
-        <ThemedText>
-          Nice!{" "}
-          <ThemedText style={{ fontWeight: "bold" }}>
-            {waterGoal} liters
-          </ThemedText>{" "}
-          is a great goal!
-        </ThemedText>
-      </View>
-      <View style={styles.section}>
-        <ThemedText type="subtitle">Notifications</ThemedText>
-        <ThemedText>
-          We use notifications to keep you on track and motivated for your
-          goals!
-        </ThemedText>
-        <View
-          style={{
-            borderColor: "gray",
-            borderWidth: StyleSheet.hairlineWidth,
-          }}
-        />
-        <ThemedText>
-          How often would you like to be notified to stay on track?
-        </ThemedText>
-        <NotificationFrequency freq={notifFreq} setFreq={setNotifFreq} />
-        <ThemedText>When should we notify you? </ThemedText>
-        <NotificationTimeRange
-          {...{ notifStart, notifEnd, setNotifStart, setNotifEnd }}
-        />
-      </View>
-
-      <View style={styles.section}>
-        <ThemedText type="subtitle">Account</ThemedText>
-        <View
-          style={{
-            borderColor: "gray",
-            borderWidth: StyleSheet.hairlineWidth,
-          }}
-        />
-        <ThemedText>Currently signed in as {user?.fullName}</ThemedText>
-        <Pressable
-          style={{
-            width: "100%",
-            backgroundColor: "#E24545",
-            borderRadius: 8,
-            padding: 8,
-          }}
-          onPress={() => signOut()}>
-          <ThemedText
-            style={{ fontWeight: "bold", color: "white", textAlign: "center" }}>
-            Log Out
+        <View style={styles.section}>
+          <ThemedText type="subtitle">Water Goal</ThemedText>
+          <ThemedText>
+            It's good to have a consistent goal for daily water intake!
           </ThemedText>
-        </Pressable>
-      </View>
-    </ScrollView>
+          <View
+            style={{
+              borderColor: "gray",
+              borderWidth: StyleSheet.hairlineWidth,
+            }}
+          />
+          <ThemedText>
+            How much water (measured in Liters) do you want to drink per day?
+            (1L ≈ 4 cups){" "}
+          </ThemedText>
+          <WaterGoal waterGoal={waterGoal} setWaterGoal={setWaterGoal} />
+          <ThemedText>
+            Nice!{" "}
+            <ThemedText style={{ fontWeight: "bold" }}>
+              {waterGoal} liters
+            </ThemedText>{" "}
+            is a great goal!
+          </ThemedText>
+        </View>
+        <View style={styles.section}>
+          <ThemedText type="subtitle">Notifications</ThemedText>
+          <ThemedText>
+            We use notifications to keep you on track and motivated for your
+            goals!
+          </ThemedText>
+          <View
+            style={{
+              borderColor: "gray",
+              borderWidth: StyleSheet.hairlineWidth,
+            }}
+          />
+          <ThemedText>
+            How often would you like to be notified to stay on track?
+          </ThemedText>
+          <NotificationFrequency freq={notifFreq} setFreq={setNotifFreq} />
+          <ThemedText>When should we notify you? </ThemedText>
+          <NotificationTimeRange
+            {...{ notifStart, notifEnd, setNotifStart, setNotifEnd }}
+          />
+        </View>
+
+        <View style={styles.section}>
+          <ThemedText type="subtitle">Account</ThemedText>
+          <View
+            style={{
+              borderColor: "gray",
+              borderWidth: StyleSheet.hairlineWidth,
+            }}
+          />
+          <ThemedText>Currently signed in as {user?.fullName}</ThemedText>
+          <LogOut />
+        </View>
+      </ScrollView>
+    </GestureHandlerRootView>
   );
 }
 
