@@ -60,7 +60,7 @@ export default function AddScreen() {
               setOunces(parseFloat(text.replace(/[^0-9]/g, "")));
             }}
           />
-          <Text>fl oz.</Text>
+          <Text style={{ fontFamily: "Nunito" }}>fl oz.</Text>
         </View>
         <ThemedText style={{ fontWeight: "bold" }}>or</ThemedText>
         <View style={styles.inputWrapper}>
@@ -74,7 +74,7 @@ export default function AddScreen() {
               setOunces(li_to_oz(liters));
             }}
           />
-          <Text>Liters</Text>
+          <Text style={{ fontFamily: "Nunito" }}>Liters</Text>
         </View>
       </View>
       <Pressable
@@ -82,7 +82,10 @@ export default function AddScreen() {
         onPress={() => {
           router.back();
         }}>
-        <Text style={{ textAlign: "center", color: "white" }}>Submit</Text>
+        <Text
+          style={{ textAlign: "center", color: "white", fontFamily: "Nunito" }}>
+          Submit
+        </Text>
       </Pressable>
     </ThemedView>
   );
@@ -116,6 +119,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 6,
     width: 68,
     textAlign: "right",
+    fontFamily: "Nunito",
   },
   content: {
     flex: 1,

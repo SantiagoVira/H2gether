@@ -21,7 +21,7 @@ export function ThemedText({
   return (
     <Text
       style={[
-        { color },
+        { color, fontFamily: "Nunito", overflow: "visible" },
         type === "default" ? styles.default : undefined,
         type === "title" ? styles.title : undefined,
         type === "defaultSemiBold" ? styles.defaultSemiBold : undefined,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: "bold",
-    lineHeight: 32,
+    lineHeight: 36,
   },
   subtitle: {
     fontSize: 20,

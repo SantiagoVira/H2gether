@@ -53,6 +53,7 @@ const AuthScreen = () => {
             marginTop: 10,
             textAlign: "center",
             color: "#547BE5",
+            fontFamily: "Nunito",
           }}>
           H2gether
         </Text>

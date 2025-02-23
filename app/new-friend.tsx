@@ -17,6 +17,7 @@ const NewFriend: React.FC = () => {
           borderColor: "#818181",
           borderRadius: 8,
           padding: 8,
+          fontFamily: "Nunito",
         }}
         placeholderTextColor={"#999999"}
         placeholder="johnfriendly@email.email"
@@ -28,7 +29,10 @@ const NewFriend: React.FC = () => {
           router.back();
         }}>
         <IconSymbol name="person.badge.plus" color="white" />
-        <Text style={{ textAlign: "center", color: "white" }}>Add Friend</Text>
+        <Text
+          style={{ textAlign: "center", color: "white", fontFamily: "Nunito" }}>
+          Add Friend
+        </Text>
       </Pressable>
     </ThemedView>
   );

@@ -13,6 +13,7 @@ export const Divider: React.FC<React.PropsWithChildren> = ({ children }) => {
       <Text
         style={{
           color: "#666666",
+          fontFamily: "Nunito",
         }}>
         {children}
       </Text>

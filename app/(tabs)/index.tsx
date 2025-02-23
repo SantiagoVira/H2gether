@@ -5,10 +5,24 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import WaterTracker from "@/components/home/water-tracker";
 
+const getMsToday = () => {
+  const now = new Date();
+  const startOfDay = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate(),
+    0,
+    0,
+    0,
+    0
+  );
+  return now.getTime() - startOfDay.getTime();
+};
+
 export default function HomeScreen() {
   const NAME = "Santiago";
   const DRANK = 0.5;
-  const GOAL = 0.7;
+  const GOAL = getMsToday() / (1000 * 60 * 60 * 24);
   const MESSAGES = [
     "You've fallen behind schedule. Let's pick up the pace!",
     "You're staying on track! Great work, keep it up!",
@@ -29,6 +43,7 @@ export default function HomeScreen() {
           fontWeight: "bold",
           marginLeft: 25,
           fontSize: 50,
+          fontFamily: "Nunito",
         }}>
         {100 * DRANK}%
       </Text>
