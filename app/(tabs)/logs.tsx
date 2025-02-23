@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import Log from "@/components/logs/log";
-import { Divider } from "@/components/logs/divider";
+import { Divider } from "@/components/divider";
 import { LogType } from "@/types";
 
 export default function TabTwoScreen() {

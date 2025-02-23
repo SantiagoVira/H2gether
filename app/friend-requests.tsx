@@ -1,17 +1,20 @@
+import { Divider } from "@/components/divider";
+import RequestRow from "@/components/friends/request-row";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { FriendType } from "@/types";
+import { FriendRequestType, FriendType } from "@/types";
 import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { StyleSheet, View } from "react-native";
 
 const Project: React.FC = () => {
-  const FRIENDS: FriendType[] = [
-    { name: "John E.", drank: 2 },
-    { name: "Aramie E.", drank: 80 },
-    { name: "Nirjhor N.", drank: 10 },
-    { name: "Santiago V.", drank: 30 },
+  const INCOMING_REQUESTS: FriendRequestType[] = [
+    { name: "Nice Guy", incoming: true },
   ];
+  const OUTGOING_REQUESTS: FriendRequestType[] = [
+    { name: "Hm Guy", incoming: false },
+  ];
+
   return (
     <ThemedView style={styles.content}>
       <View style={styles.header}>
@@ -19,7 +22,20 @@ const Project: React.FC = () => {
           <Ionicons name="chevron-back" color="black" size={28} />
         </Link>
       </View>
-      <ThemedText type="title">Your Friends</ThemedText>
+      <View style={{ paddingLeft: 15 }}>
+        <ThemedText type="title" style={{ marginBottom: 18 }}>
+          Friend Requests
+        </ThemedText>
+        <Divider>Incoming</Divider>
+        {INCOMING_REQUESTS.map((r, i) => (
+          <RequestRow key={i} name={r.name} />
+        ))}
+        <View style={{ height: 30 }} />
+        <Divider>Outgoing</Divider>
+        {OUTGOING_REQUESTS.map((r, i) => (
+          <RequestRow key={i} name={r.name} />
+        ))}
+      </View>
     </ThemedView>
   );
 };
