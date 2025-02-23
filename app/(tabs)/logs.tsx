@@ -8,6 +8,7 @@ import { LogType } from "@/types";
 export default function TabTwoScreen() {
   const TODAY_LOGS: LogType[] = [
     { type: 2, message: "You finished your goal!", time: new Date() },
+    { type: 1, message: "John finished their goal!", time: new Date() },
   ];
   const PREVIOUS_LOGS: LogType[] = [
     {

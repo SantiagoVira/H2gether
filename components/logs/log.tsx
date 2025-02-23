@@ -20,7 +20,7 @@ const icons = [
     Icon: () => <IconSymbol size={22} name="water.waves" color="#FFFFFFBB" />,
   },
   {
-    color: "#F5CD6F",
+    color: "#F5A76F",
     Icon: () => <IconSymbol size={22} name="trophy.fill" color="#FFFFFFBB" />,
   },
   {

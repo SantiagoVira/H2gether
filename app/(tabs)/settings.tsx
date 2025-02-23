@@ -2,9 +2,10 @@ import { StyleSheet, View, ScrollView } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import WaterGoal from "@/components/settings/water-goal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NotificationFrequency from "@/components/settings/notification-frequency";
 import NotificationTimeRange from "@/components/settings/notification-time-range";
+import * as Haptics from "expo-haptics";
 
 export default function TabTwoScreen() {
   const EIGHT_AM = new Date();
@@ -16,6 +17,14 @@ export default function TabTwoScreen() {
   const [notifFreq, setNotifFreq] = useState(3);
   const [notifStart, setNotifStart] = useState(EIGHT_AM);
   const [notifEnd, setNotifEnd] = useState(EIGHT_PM);
+
+  useEffect(() => {
+    if (process.env.EXPO_OS === "ios") {
+      // Add a soft haptic feedback when pressing down on the tabs.
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    }
+  }, [waterGoal]);
+
   return (
     <ScrollView
       style={styles.content}
