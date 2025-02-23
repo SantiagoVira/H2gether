@@ -4,6 +4,8 @@ import { HelloWave } from "@/components/HelloWave";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import WaterTracker from "@/components/home/water-tracker";
+import { useUser } from "@clerk/clerk-expo";
+import { trpc } from "@/lib/trpc";
 
 const getMsToday = () => {
   const now = new Date();
@@ -20,23 +22,26 @@ const getMsToday = () => {
 };
 
 export default function HomeScreen() {
-  const NAME = "Santiago";
-  const DRANK = 0.52;
+  const { user } = useUser();
+  const [percentDrank] = trpc.user.getPercentDrank.useSuspenseQuery({
+    userId: user!.id,
+  });
   const GOAL = getMsToday() / (1000 * 60 * 60 * 24);
   const MESSAGES = [
     "You've fallen behind schedule. Let's pick up the pace!",
     "You're staying on track! Great work, keep it up!",
     "You're way ahead of schedule! Fantastic job!!",
   ];
-  const messageIdx = Math.abs(GOAL - DRANK) < 0.05 ? 1 : DRANK > GOAL ? 2 : 0;
+  const messageIdx =
+    Math.abs(GOAL - percentDrank) < 0.05 ? 1 : percentDrank > GOAL ? 2 : 0;
   return (
     <ThemedView style={styles.content}>
       <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Hey {NAME}!</ThemedText>
+        <ThemedText type="title">Hey {user?.firstName}!</ThemedText>
         <HelloWave />
       </ThemedView>
       <ThemedText>{MESSAGES[messageIdx]}</ThemedText>
-      <WaterTracker drank={DRANK} goal={GOAL} />
+      <WaterTracker drank={percentDrank} goal={GOAL} />
       <Text
         style={{
           textAlign: "center",
@@ -45,7 +50,7 @@ export default function HomeScreen() {
           fontSize: 50,
           fontFamily: "Nunito",
         }}>
-        {100 * DRANK}%
+        {100 * percentDrank}%
       </Text>
     </ThemedView>
   );

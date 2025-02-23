@@ -3,6 +3,11 @@ import { publicProcedure } from "./trpc";
 import {} from "hono";
 
 export const authedProcedure = publicProcedure.use(async ({ ctx, next }) => {
+  try {
+    console.log(ctx.honoCtx.req.raw);
+  } catch (err) {
+    console.error("ERR: ", err);
+  }
   const { isSignedIn, toAuth } = await ctx.clerk.authenticateRequest(
     ctx.honoCtx.req.raw
   );

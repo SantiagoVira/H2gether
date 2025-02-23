@@ -23,23 +23,38 @@ const userRouter = router({
         },
       });
     }),
-  addWater: authedProcedure
+  addWater: publicProcedure
     .input(
       z.object({
-        liters: z.number(),
         userId: z.string(),
+        liters: z.number(),
       })
     )
     .mutation(async ({ input, ctx }) => {
+      console.log(input.liters);
       return await ctx.db
         .update(users)
         .set({ drank: sql`${users.drank} + ${input.liters}` })
-        .where(eq(users.id, ctx.user.id));
+        .where(eq(users.id, input.userId));
+    }),
+  getPercentDrank: publicProcedure
+    .input(z.object({ userId: z.string() }))
+    .query(async ({ input, ctx }) => {
+      const user = await ctx.db.query.users.findFirst({
+        where: eq(users.id, input.userId),
+      });
+      if (!user) return 0;
+      return user.drank / user.goal;
     }),
   createIfNotExists: publicProcedure
     .input(z.object({ userId: z.string(), fullName: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      console.log("wahhhhhh");
+      const exists = await ctx.db.query.users.findFirst({
+        where: eq(users.id, input.userId),
+      });
+      if (exists) {
+        return;
+      }
       return await ctx.db
         .insert(users)
         .values({ id: input.userId, name: input.fullName });

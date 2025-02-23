@@ -6,6 +6,8 @@ import { ThemedView } from "@/components/ThemedView";
 import QuickAddRow from "@/components/add/quick-add-row";
 import Row from "@/components/ui/row";
 import { useEffect, useState } from "react";
+import { trpc } from "@/lib/trpc";
+import { useUser } from "@clerk/clerk-expo";
 
 export const CONVERSION_FACTOR = 33.814;
 export const li_to_oz = (li: number) =>
@@ -16,6 +18,9 @@ export const oz_to_li = (oz: number) =>
 export default function AddScreen() {
   const [liters, setLiters] = useState(1);
   const [ounces, setOunces] = useState(li_to_oz(1));
+  const addWaterMutation = trpc.user.addWater.useMutation();
+  const { user } = useUser();
+  const trpcUtils = trpc.useUtils();
 
   useEffect(() => {
     setLiters(oz_to_li(ounces));
@@ -80,6 +85,10 @@ export default function AddScreen() {
       <Pressable
         style={styles.submit}
         onPress={() => {
+          addWaterMutation
+            .mutateAsync({ userId: user?.id ?? "", liters })
+            .catch(console.error)
+            .then(() => trpcUtils.user.getPercentDrank.invalidate());
           router.back();
         }}>
         <Text
