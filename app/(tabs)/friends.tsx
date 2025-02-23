@@ -11,13 +11,25 @@ export default function TabTwoScreen() {
   const FRIENDS: FriendType[] = [
     { name: "John E.", drank: 2 },
     { name: "Jim V.", drank: 80 },
-    { name: "Jack R.", drank: 10 },
-    { name: "James F.", drank: 30 },
+    { name: "Jane R.", drank: 10 },
+    { name: "Gilbert F.", drank: 30 },
+    { name: "Jess L.", drank: 15 },
+    { name: "Jack P.", drank: 66 },
+    { name: "Matt C.", drank: 110 },
+    { name: "Felix G.", drank: 4 },
+    { name: "Chuck O.", drank: 1 },
+    { name: "Thea G.", drank: 18 },
+    { name: "Coco V.", drank: 48 },
   ];
-  const YOU: FriendType = { name: "You", drank: 90 };
+  const YOU: FriendType = { name: "You", drank: 52 };
 
-  const REQUESTS: FriendRequestType[] = [];
-  // const data = trpc.user.getFriends.useQuery({ userId: "" });
+  const REQUESTS: FriendRequestType[] = [
+    { name: "Todd Beasly", incoming: true },
+    { name: "Scam McScammer", incoming: false },
+  ];
+
+  const data = trpc.user.getFriends.useQuery({ userId: "abc" });
+  console.log(data);
 
   return (
     <ThemedView style={styles.content}>

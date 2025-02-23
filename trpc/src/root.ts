@@ -1,7 +1,8 @@
 import { publicProcedure, router } from "./trpc";
 import { z } from "zod";
-import { eq, or } from "drizzle-orm";
-import { friendships } from "../../db/schema";
+import { eq, or, sql } from "drizzle-orm";
+import { friendships, users } from "../../db/schema";
+import { authedProcedure } from "./authed-procedure";
 
 const userRouter = router({
   getFriends: publicProcedure
@@ -21,6 +22,27 @@ const userRouter = router({
           },
         },
       });
+    }),
+  addWater: authedProcedure
+    .input(
+      z.object({
+        liters: z.number(),
+        userId: z.string(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      return await ctx.db
+        .update(users)
+        .set({ drank: sql`${users.drank} + ${input.liters}` })
+        .where(eq(users.id, ctx.user.id));
+    }),
+  createIfNotExists: publicProcedure
+    .input(z.object({ userId: z.string(), fullName: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      console.log("wahhhhhh");
+      return await ctx.db
+        .insert(users)
+        .values({ id: input.userId, name: input.fullName });
     }),
 });
 

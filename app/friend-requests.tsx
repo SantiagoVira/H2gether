@@ -9,10 +9,10 @@ import { StyleSheet, View } from "react-native";
 
 const Project: React.FC = () => {
   const INCOMING_REQUESTS: FriendRequestType[] = [
-    { name: "Nice Guy", incoming: true },
+    { name: "Todd Beasly", incoming: true },
   ];
   const OUTGOING_REQUESTS: FriendRequestType[] = [
-    { name: "Hm Guy", incoming: false },
+    { name: "Scam McScammer", incoming: false },
   ];
 
   return (

@@ -21,7 +21,7 @@ const getMsToday = () => {
 
 export default function HomeScreen() {
   const NAME = "Santiago";
-  const DRANK = 0.5;
+  const DRANK = 0.52;
   const GOAL = getMsToday() / (1000 * 60 * 60 * 24);
   const MESSAGES = [
     "You've fallen behind schedule. Let's pick up the pace!",

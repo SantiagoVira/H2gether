@@ -14,7 +14,12 @@ import SuperJSON from "superjson";
 import { useColorScheme } from "@/hooks/useColorScheme";
 
 import { tokenCache } from "@/cache";
-import { ClerkProvider, ClerkLoaded, useAuth } from "@clerk/clerk-expo";
+import {
+  ClerkProvider,
+  ClerkLoaded,
+  useAuth,
+  useUser,
+} from "@clerk/clerk-expo";
 import { httpBatchLink } from "@trpc/client";
 import { trpc } from "@/lib/trpc";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -41,11 +46,30 @@ const TrpcWrapper: React.FC<React.PropsWithChildren> = ({ children }) => {
       transformer: SuperJSON,
     })
   );
+
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </trpc.Provider>
   );
+};
+
+const Bullshit: React.FC = () => {
+  console.log("pendejo");
+  const fuck = trpc.user.createIfNotExists.useMutation();
+  const { user } = useUser();
+
+  useEffect(() => {
+    console.log("whats gilberts sisters name");
+    fuck
+      .mutateAsync({
+        userId: user?.id ?? "aaa",
+        fullName: user?.fullName ?? "Fuck you",
+      })
+      .then(console.log);
+  }, []);
+
+  return <></>;
 };
 
 export default function RootLayout() {
@@ -79,6 +103,7 @@ export default function RootLayout() {
         <TrpcWrapper>
           <ThemeProvider
             value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+            <Bullshit />
             <Stack>
               <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
               <Stack.Screen name="(auth)" options={{ headerShown: false }} />

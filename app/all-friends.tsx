@@ -9,9 +9,16 @@ import { StyleSheet, View } from "react-native";
 const AllFriends: React.FC = () => {
   const FRIENDS: FriendType[] = [
     { name: "John E.", drank: 2 },
-    { name: "Aramie E.", drank: 80 },
-    { name: "Nirjhor N.", drank: 10 },
-    { name: "Santiago V.", drank: 30 },
+    { name: "Jim V.", drank: 80 },
+    { name: "Jane R.", drank: 10 },
+    { name: "Gilbert F.", drank: 30 },
+    { name: "Jess L.", drank: 15 },
+    { name: "Jack P.", drank: 66 },
+    { name: "Matt C.", drank: 110 },
+    { name: "Felix G.", drank: 4 },
+    { name: "Chuck O.", drank: 1 },
+    { name: "Thea G.", drank: 18 },
+    { name: "Coco V.", drank: 48 },
   ];
   return (
     <ThemedView style={styles.content}>
